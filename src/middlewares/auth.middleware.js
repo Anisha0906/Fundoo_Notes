@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
-//import dotenv from 'dotenv';
+
 
 
 /**
@@ -22,7 +22,7 @@ export const userAuth = async (req, res, next) => {
     bearerToken = bearerToken.split(' ')[1];
 
     const { user } = await jwt.verify(bearerToken, process.env.SECRET_KEY);
-   // req.body.email=res.user.email
+    req.body.UserID=user.email;
     next();
   } catch (error) {
     res.status( HttpStatus.BAD_REQUEST).json({
