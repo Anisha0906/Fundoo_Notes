@@ -16,8 +16,11 @@ import * as NoteService from '../services/notes.service';
         message: 'Note created successfully'
       });
     } catch (error) {
-      next(error);
-    }
+      res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
   };
 
   /**
@@ -46,7 +49,7 @@ export const  getAllNotes= async (req, res, next) => {
  */
 export const getNote = async (req, res, next) => {
   try {
-    const data = await NoteService.getNote(req.params._id);
+    const data = await NoteService.getNote(req.params._id,req.body.UserID);
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: data,
@@ -64,7 +67,7 @@ export const getNote = async (req, res, next) => {
  */
  export const updateNote = async (req, res, next) => {
   try {
-    const data = await NoteService.updateNote(req.params._id, req.body);
+    const data = await NoteService.updateNote(req.params._id, req.body,req.body.UserID);
     res.status(HttpStatus.ACCEPTED).json({
       code: HttpStatus.ACCEPTED,
       data: data,
@@ -82,7 +85,7 @@ export const getNote = async (req, res, next) => {
  */
 export const deleteNote = async (req, res, next) => {
   try {
-    await NoteService.deleteNote(req.params._id);
+    await NoteService.deleteNote(req.params._id,req.body.UserID);
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: [],
@@ -100,7 +103,7 @@ export const deleteNote = async (req, res, next) => {
  */
  export const archiveNote = async (req, res, next) => {
   try {
-    const data = await NoteService.archiveNote(req.params._id);
+    const data = await NoteService.archiveNote(req.params._id,req.body.UserID);
     res.status(HttpStatus.ACCEPTED).json({
       code: HttpStatus.ACCEPTED,
       data: data,
@@ -119,7 +122,7 @@ export const deleteNote = async (req, res, next) => {
  */
 export const trashNote = async (req, res, next) => {
   try {
-    const data = await NoteService.trashNote(req.params._id);
+    const data = await NoteService.trashNote(req.params._id,req.body.UserID);
     res.status(HttpStatus.ACCEPTED).json({
       code: HttpStatus.ACCEPTED,
       data: data,

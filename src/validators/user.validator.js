@@ -24,7 +24,7 @@ export const  NewNotesValidator = (req, res, next) => {
   color: Joi.string().optional(),
   isArchived: Joi.string().optional(),
   isDeleted:Joi.string().optional(),
-  //UserID:Joi.string().required(),
+  UserID:Joi.string().optional(),
    
   });
   const { error, value } = schema.validate(req.body);
