@@ -1,8 +1,6 @@
 import HttpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
-
-
 /**
  * Middleware to authenticate if user has a valid Authorization token
  * Authorization: Bearer <token>
