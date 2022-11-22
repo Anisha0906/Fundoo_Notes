@@ -88,7 +88,7 @@ describe('UserRegistration', () => {
   const inputBody={
     "firstname":"Anisha",
     "lastname":"Das",
-    "email":"abcde@gmail.com",
+    "email":"abcde",
     "password":"abcd@1234"
   }
   it('user registration details should be saved in database', (done) => {
@@ -139,5 +139,74 @@ describe('UserRegistration', () => {
       });
     });
   });
+
+//7.Test case for valid user login
+describe('UserLogin', () => {
+  const inputBody={
+    "email":"anishadas880@gmail.com",
+    "password":"abcd@1234"
+  }
+  it('user login details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/login')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(200);
+        done();
+      });
+    });
+  });
+
+  //8.Test case for invalid login email
+describe('UserLogin', () => {
+  const inputBody={
+    "email":"abcde@gmail.com",
+    "password":"abcd@1234"
+  }
+  it('user login details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/login')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(400);
+        done();
+      });
+    });
+  });
+
+  //9.Test case for invalid login password
+describe('UserLogin', () => {
+  const inputBody={
+    "email":"anishadas880@gmail.com",
+    "password":"123456789"
+  }
+  it('user login details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/login')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(400);
+        done();
+      });
+    });
+  });
+
+  //10.Test case for password data not found
+describe('UserLogin', () => {
+  const inputBody={
+    "email":"anishadas880@gmail.com",
+    "password":""
+  }
+  it('user login details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/login')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(404);
+        done();
+      });
+    });
+  });
+
 });
 
