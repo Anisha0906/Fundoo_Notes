@@ -26,16 +26,100 @@ describe('User APIs Test', () => {
     done();
   });
 
-  describe('GET /users', () => {
-    it('should return empty array', (done) => {
-      request(app)
-        .get('/api/v1/users')
-        .end((err, res) => {
-          expect(res.statusCode).to.be.equal(200);
-          expect(res.body.data).to.be.an('array');
-
-          done();
-        });
+//1.Test case for valid user registration
+describe('UserRegistration', () => {
+  const inputBody={
+    "firstname":"Anisha",
+    "lastname":"Das",
+    "email":"anishadas880@gmail.com",
+    "password":"abcd@1234"
+  }
+  it('user registration details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/Register')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(201);
+        done();
+      });
     });
   });
+
+//2.Testcase for invalid firstname
+describe('UserRegistration', () => {
+  const inputBody={
+    "firstname":"An",
+    "lastname":"Das",
+    "email":"anishadas880@gmail.com",
+    "password":"abcd@1234"
+  }
+  it('user registration details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/Register')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(400);
+        done();
+      });
+    });
+  });
+
+  //3.Testcase for invalid lastname
+describe('UserRegistration', () => {
+  const inputBody={
+    "firstname":"Anisha",
+    "lastname":"D",
+    "email":"anishadas880@gmail.com",
+    "password":"abcd@1234"
+  }
+  it('user registration details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/Register')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(400);
+        done();
+      });
+    });
+  });
+
+  //4.Testcase for invalid email
+describe('UserRegistration', () => {
+  const inputBody={
+    "firstname":"Anisha",
+    "lastname":"Das",
+    "email":"abcde@gmail.com",
+    "password":"abcd@1234"
+  }
+  it('user registration details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/Register')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(400);
+        done();
+      });
+    });
+  });
+
+  //5.Testcase for invalid password
+describe('UserRegistration', () => {
+  const inputBody={
+    "firstname":"Anisha",
+    "lastname":"Das",
+    "email":"anishadas880@gmail.com",
+    "password":"1234"
+  }
+  it('user registration details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/Register')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(400);
+        done();
+      });
+    });
+  });
+
 });
+
