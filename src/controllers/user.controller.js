@@ -48,6 +48,7 @@ import * as UserService from '../services/user.service';
     const data = await UserService.forgetPassword(req.body);
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
+      data:data,
       message: 'User reset password'
     });
   } catch (error) {
@@ -60,12 +61,12 @@ import * as UserService from '../services/user.service';
  * @param {object} res - response object
  * @param {Function} next
  */
- export const resetPassword = async (req, res, next) => {
+ export const NewPassword = async (req, res, next) => {
   try {
-    const data = await UserService.resetPassword(req.body);
+    const data = await UserService.NewPassword(req.body);
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
-      data: data,
+      data:data,
       message: 'new password created successfully'
     });
   } catch (error) {

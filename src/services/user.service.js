@@ -34,8 +34,8 @@ export const forgetPassword = async (body) => {
   if (data !== null) {
   var token = jwt.sign({email: data.email, id: data._id},process.env.SECRET_KEY
       );
-      const result = await sendEMail(body.email, token);
-    return result;
+const result = await sendEMail(body.email, token);
+    return token;
   } else {
     throw new Error('user not registered');
   }
@@ -46,9 +46,9 @@ export const NewPassword = async (body) => {
   const saltRounds = 10;
   const hashPassword = await bcrypt.hash(body.password, saltRounds);
   body.password = hashPassword;
-  const data = await User.findByIdAndUpdate(
-    {email:body.email },
-    body,
+  const data = await User.findOneAndUpdate(
+    {email:body.email},
+    {password:hashPassword},
     {
       new: true
     }

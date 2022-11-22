@@ -31,7 +31,7 @@ oAuth2Client.setCredentials({ refresh_token : REFRESH_TOKEN})
         to: email,
         subject: 'Hello from my gmail using API',
         text: 'Hello from my gmail email using API',
-        html: '<h1>To reset your password<a href=" http://localhost:4000/api/v1/ResetPWD">click here </a></h1>',
+        html: '<h1>To reset your password<a href=" http://localhost:4000/api/v1/ResetPWD"> click here </a></h1>',
        };
        const result = await transport.sendMail(mailOptions)
        return result
