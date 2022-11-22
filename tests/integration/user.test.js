@@ -121,5 +121,23 @@ describe('UserRegistration', () => {
     });
   });
 
+  //6.Testcase for data not found
+describe('UserRegistration', () => {
+  const inputBody={
+    "firstname":"Anisha",
+    "lastname":"Das",
+    "email":"anishadas880@gmail.com",
+    "password":""
+  }
+  it('user registration details should be saved in database', (done) => {
+    request(app)
+      .post('/api/v1/users/Register')
+      .send(inputBody)
+      .end((err, res) => {
+        expect(res.statusCode).to.be.equal(404);
+        done();
+      });
+    });
+  });
 });
 
