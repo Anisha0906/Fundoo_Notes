@@ -34,7 +34,7 @@ describe('UserRegistration', () => {
     "email":"anishadas880@gmail.com",
     "password":"abcd@1234"
   }
-  it('user registration details should be saved in database', (done) => {
+  it('Given user registration details should be saved in database', (done) => {
     request(app)
       .post('/api/v1/users/Register')
       .send(inputBody)
@@ -53,12 +53,12 @@ describe('UserRegistration', () => {
     "email":"anishadas880@gmail.com",
     "password":"abcd@1234"
   }
-  it('user registration details should be saved in database', (done) => {
+  it('Given user registration details should not be saved in database', (done) => {
     request(app)
       .post('/api/v1/users/Register')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(400);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -72,12 +72,12 @@ describe('UserRegistration', () => {
     "email":"anishadas880@gmail.com",
     "password":"abcd@1234"
   }
-  it('user registration details should be saved in database', (done) => {
+  it('Given user registration details should not be saved in database', (done) => {
     request(app)
       .post('/api/v1/users/Register')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(400);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -91,12 +91,12 @@ describe('UserRegistration', () => {
     "email":"abcde",
     "password":"abcd@1234"
   }
-  it('user registration details should be saved in database', (done) => {
+  it('Given user registration details should not be saved in database', (done) => {
     request(app)
       .post('/api/v1/users/Register')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(400);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -110,12 +110,12 @@ describe('UserRegistration', () => {
     "email":"anishadas880@gmail.com",
     "password":"1234"
   }
-  it('user registration details should be saved in database', (done) => {
+  it('Given user registration details should not be saved in database', (done) => {
     request(app)
       .post('/api/v1/users/Register')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(400);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -129,12 +129,12 @@ describe('UserRegistration', () => {
     "email":"anishadas880@gmail.com",
     "password":""
   }
-  it('user registration details should be saved in database', (done) => {
+  it('Given user registration details should not be saved in database', (done) => {
     request(app)
       .post('/api/v1/users/Register')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(404);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -146,7 +146,7 @@ describe('UserLogin', () => {
     "email":"anishadas880@gmail.com",
     "password":"abcd@1234"
   }
-  it('user login details should be saved in database', (done) => {
+  it('Given user login details should log in database', (done) => {
     request(app)
       .post('/api/v1/users/login')
       .send(inputBody)
@@ -163,12 +163,12 @@ describe('UserLogin', () => {
     "email":"abcde@gmail.com",
     "password":"abcd@1234"
   }
-  it('user login details should be saved in database', (done) => {
+  it('Given unregistered user login details should not get logged in', (done) => {
     request(app)
       .post('/api/v1/users/login')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(400);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -180,12 +180,12 @@ describe('UserLogin', () => {
     "email":"anishadas880@gmail.com",
     "password":"123456789"
   }
-  it('user login details should be saved in database', (done) => {
+  it('Given invalid password login details should not get logged in', (done) => {
     request(app)
       .post('/api/v1/users/login')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(400);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
@@ -197,12 +197,12 @@ describe('UserLogin', () => {
     "email":"anishadas880@gmail.com",
     "password":""
   }
-  it('user login details should be saved in database', (done) => {
+  it('Given invalid password login details should not get logged in', (done) => {
     request(app)
       .post('/api/v1/users/login')
       .send(inputBody)
       .end((err, res) => {
-        expect(res.statusCode).to.be.equal(404);
+        expect(res.statusCode).to.be.equal(500);
         done();
       });
     });
