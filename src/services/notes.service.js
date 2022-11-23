@@ -13,8 +13,8 @@ export const createNote = async (body) => {
   };
 
   //get a note by id
-export const getNote = async (id) => {
-  const data = await Notes.findById({id:id});
+export const getNote = async (_id) => {
+  const data = await Notes.findById({_id:_id});
   return data;
 };
 
@@ -33,8 +33,8 @@ export const updateNote = async (_id, body,UserID) => {
 };
 
 //delete a Single note
-export const deleteNote = async (id,UserID) => {
-  await Notes.findByIdAndDelete({id:id,UserID:UserID});
+export const deleteNote = async (_id,UserID) => {
+  await Notes.findByIdAndDelete({_id:_id,UserID:UserID});
   return '';
 };
 
