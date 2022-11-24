@@ -300,21 +300,9 @@ describe('UserLogin', () => {
         });
       });
 
-    //16.Delete a note by id test case
-    describe('Delete a note by id', () => {
-    it('Given note details should be deleted from database using id', (done) => {
-       request(app)
-        .delete(`/api/v1/notes/${note_id}`)
-        .set('authorization',`Bearer ${token}`)
-       .end((err, res) => {
-        console.log(res.body);
-        expect(res.statusCode).to.be.equal(200);
-        done();
-      });
-    });
-  });
+    
 
-  //17.Inalid Create note without title test case 
+  //16.Inalid Create note without title test case 
   describe('Create Note', () => {
     const inputBody={
       "title":"",
@@ -332,7 +320,7 @@ describe('UserLogin', () => {
         });
       });
     });
-    //18.Inalid Create note without description test case
+    //17.Inalid Create note without description test case
     describe('Create Note', () => {
       const inputBody={
         "title":"Mynote-3",
@@ -350,5 +338,47 @@ describe('UserLogin', () => {
           });
         });
       });
+
+    //18.archive a note by id test case
+      describe('Archive a note by id', () => {
+        it('Given note details should archive using id from database', (done) => {
+          request(app)
+            .put(`/api/v1/notes/${note_id}/archive`)
+            .set('authorization',`Bearer ${token}`)
+            .end((err, res) => {
+              console.log(res.body);
+              expect(res.statusCode).to.be.equal(202);
+              done();
+            });
+          });
+        });
+
+   //19.Trash a note by id test case
+       describe('Trash a note by id', () => {
+        it('Given note details should be trashed using id from database', (done) => {
+          request(app)
+            .put(`/api/v1/notes/${note_id}/trash`)
+            .set('authorization',`Bearer ${token}`)
+            .end((err, res) => {
+              console.log(res.body);
+              expect(res.statusCode).to.be.equal(202);
+              done();
+            });
+          });
+        });
+        
+    //20.Delete a note by id test case
+    describe('Delete a note by id', () => {
+      it('Given note details should be deleted from database using id', (done) => {
+         request(app)
+          .delete(`/api/v1/notes/${note_id}`)
+          .set('authorization',`Bearer ${token}`)
+         .end((err, res) => {
+          console.log(res.body);
+          expect(res.statusCode).to.be.equal(200);
+          done();
+        });
+      });
+    });
 });
 
