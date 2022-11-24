@@ -5,16 +5,31 @@
       "title": "Fundoo Notes",
       "description": "Fundoo Notes CLI"
     },
+   
     "host": "localhost:4000",
     "basePath": "/api/v1/",
+    "tags": [
+      {
+      "name": "CLI",
+      "description": "Creating user"
+      }
+      ],
    
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
     "paths": {
       "/users/Register": {
         "post": {
-          "tags": ["Users"],
+          "tags": [
+            "Users"
+          ],
           "description": "New user Registration",
           "parameters": [
             {
@@ -26,7 +41,9 @@
               }
             }
           ],
-          "produces": ["application/json"],
+          "produces": [
+            "application/json"
+          ],
           "responses": {
             "201": {
               "description": "User created"
@@ -40,7 +57,9 @@
   
       "/users/login": {
         "post": {
-          "tags": ["Users"],
+          "tags": [
+            "Users"
+          ],
           "description": "User login",
           "parameters": [
             {
@@ -52,7 +71,9 @@
               }
             }
           ],
-          "produces": ["application/json"],
+          "produces": [
+            "application/json"
+          ],
           "responses": {
             "200": {
               "description": "user login successful"
