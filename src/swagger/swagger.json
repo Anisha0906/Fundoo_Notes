@@ -1,0 +1,98 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "v1",
+      "title": "Fundoo Notes",
+      "description": "Fundoo Notes CLI"
+    },
+    "host": "localhost:4000",
+    "basePath": "/api/v1/",
+   
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/users/Register": {
+        "post": {
+          "tags": ["Users"],
+          "description": "New user Registration",
+          "parameters": [
+            {
+              "name": "create new user",
+              "in": "body",
+              "description": "User",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "201": {
+              "description": "User created"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/users/login": {
+        "post": {
+          "tags": ["Users"],
+          "description": "User login",
+          "parameters": [
+            {
+              "name": "login user",
+              "in": "body",
+              "description": "login",
+              "schema": {
+                "$ref": "#/definitions/login"
+              }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "user login successful"
+            },
+            "500": {
+              "description": "Internal server error"
+             }
+            }
+          }
+        }
+      },
+      "definitions": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string"
+            },
+            "lastname": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        },
+    
+        "login": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        }
+    }
+}
