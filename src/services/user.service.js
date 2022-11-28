@@ -44,11 +44,11 @@ const result = await sendEMail(body.email, token);
 //Reset password
 export const NewPassword = async (body) => {
   const saltRounds = 10;
-  const hashPassword = await bcrypt.hash(body.password, saltRounds);
-  body.password = hashPassword;
+  const newhashPassword = await bcrypt.hash(body.password, saltRounds);
+  body.password = newhashPassword;
   const data = await User.findOneAndUpdate(
     {email:body.email},
-    {password:hashPassword},
+    {password:newhashPassword},
     {
       new: true
     }

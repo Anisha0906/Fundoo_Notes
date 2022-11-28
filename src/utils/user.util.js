@@ -9,7 +9,7 @@ const REFRESH_TOKEN ='1//04TbLme2mEO5xCgYIARAAGAQSNwF-L9IrD6v4T4Jfl18HDqx-HJOO5q
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI)
 oAuth2Client.setCredentials({ refresh_token : REFRESH_TOKEN})
 
- export async function sendEMail(email,token) {
+ export async function sendEMail(emailID) {
 
     try{
        const accessToken = await oAuth2Client.getAccessToken()
@@ -28,7 +28,7 @@ oAuth2Client.setCredentials({ refresh_token : REFRESH_TOKEN})
 
        const mailOptions = {
         from: 'AnishaDas <anishadas880@gmail.com>',
-        to: email,
+        to: emailID,
         subject: 'Hello from my gmail using API',
         text: 'Hello from my gmail email using API',
         html: '<h1>To reset your password<a href=" http://localhost:4000/api/v1/ResetPWD"> click here </a></h1>',
