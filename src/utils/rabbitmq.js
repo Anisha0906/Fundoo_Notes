@@ -1,5 +1,7 @@
-var amqp = require('amqplib/callback_api');
-const sender = () => {
+import { sendEmailToNewUser } from './user.util';
+
+    var amqp = require('amqplib/callback_api');
+    export const sender = (queue,msg) => {
     amqp.connect('amqp://localhost', function (error0, connection) {
         if (error0) {
             throw error0;
@@ -9,23 +11,18 @@ const sender = () => {
                 throw error1;
             }
 
-            var queue = 'hello';
-            var msg = 'Hello World!';
-
-            channel.assertQueue(queue, {
+             channel.assertQueue(queue, {
                 durable: false
             });
             channel.sendToQueue(queue, Buffer.from(msg));
 
-            console.log(" [x] Sent %s", msg);
+            console.log(`Sent : ${msg}`);
         });
-        setTimeout(function () {
-            connection.close();
-            process.exit(0);
-        }, 500);
+
     });
 }
-const reciver = () => {
+export const reciver = (queue) => {
+    var amqp = require('amqplib/callback_api');
     amqp.connect('amqp://localhost', function (error0, connection) {
         if (error0) {
             throw error0;
@@ -35,21 +32,23 @@ const reciver = () => {
                 throw error1;
             }
 
-            var queue = 'hello';
-
-            channel.assertQueue(queue, {
+                channel.assertQueue(queue, {
                 durable: false
             });
-
-            console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
-
-            channel.consume(queue, function (msg) {
-                console.log(" [x] Received %s", msg.content.toString());
-            }, {
+            channel.consume(queue,async function(msg){
+                const objectJson=msg.content.toString().toString();
+                const objectNormal=JSON.parse(objectJson);
+                const email=objectNormal.email;
+                const firstname=objectNormal.firstname;
+                const lastname=objectNormal.lastname;
+                const result=await sendEmailToNewUser(email,firstname,lastname);
+                 return result;
+            },
+             {
                 noAck: true
             });
         });
     });
 }
-sender();
-reciver();
+
+reciver('Register');

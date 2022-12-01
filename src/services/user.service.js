@@ -2,6 +2,7 @@ import User from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendEMail } from '../utils/user.util';
+import * as mq from '../utils/rabbitmq'
 
 //login user
 export const login = async (body) => {
@@ -21,11 +22,19 @@ export const login = async (body) => {
 
 //register a new user
 export const RegisterNewUser = async (body) => {
+  if(RegisterNewUser!==null){
   const saltRounds = 10;
   const hashPassword = await bcrypt.hash(body.password, saltRounds);
   body.password = hashPassword;
   const data = await User.create(body);
+
+  const dataRabbit=JSON.stringify(data);
+  mq.sender('Register',dataRabbit);
+
   return data;
+}else{
+  throw new Error("User with same email already exists");
+}
 };
 
 //forget password
