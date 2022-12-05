@@ -7,16 +7,16 @@ import  {userresetAuth}  from '../middlewares/auth.middleware';
 const router = express.Router();
 
 //route to register a new user
-router.post('/Register', NewUserValidator, userController.RegisterNewUser);
+router.post('/register', NewUserValidator, userController.RegisterNewUser);
 
 //route to login user
 router.post('/login',userController.login);
 
 //route for forget password
-router.post('/ForgetPWD', userController.forgetPassword);
+router.post('/forgetpwd', userController.forgetPassword);
 
 //route for reset password
-router.put('/ResetPWD', userresetAuth, userController.NewPassword);
+router.put('/resetpwd', userresetAuth, userController.NewPassword);
 
 
 export default router;

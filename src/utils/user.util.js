@@ -49,8 +49,7 @@ oAuth2Client.setCredentials({ refresh_token : REFRESH_TOKEN})
 
 export async function sendEmailToNewUser(emailID,firstname,lastname){
     try{
-        console.log(`${emailID} ${firstname} ${lastname}`);
-        const accessToken=await oAuth2Client.getAccessToken();
+         const accessToken=await oAuth2Client.getAccessToken();
 
         const transport=nodemailer.createTransport({
             service:'gmail',

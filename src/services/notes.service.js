@@ -77,5 +77,22 @@ export const trashNote = async (_id,UserID) => {
   return data;
 };
 
+//pin a note
+export const pinNote = async (_id,UserID) => {
+  await client.del('getallNotes');
+  const note = await Notes.findOne({ _id: _id,UserID:UserID });
+  const  pinned = note.pinned === false ? true : false;
+  const data = await Notes.findByIdAndUpdate(
+    {
+      _id:_id,UserID:UserID
+    },
+    {  pinned: pinned},
+    {
+      new: true
+    }
+  );
+  return data;
+};
+
 
 
