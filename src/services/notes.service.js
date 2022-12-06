@@ -97,26 +97,37 @@ export const pinNote = async (_id, UserID) => {
 };
 
 //add collaborator to a note 
-export const collaborateNote = async (_id,body) => {
-  const Checkcollaborator = await User.find({email:body.collaborator})
-  console.log("collaborator is",Checkcollaborator)
-  if(Checkcollaborator!=null){
-  const data = await Notes.findOneAndUpdate(
-    {
-      _id: _id
-    },
-   { $addToSet:{ collaborator:body.collaborator}
-     },
-    {
-      new: true
-    }
-  );
-  return data;
+export const collaborateNote = async (_id, body) => {
+  const Checkcollaborator = await User.find({ email: body.collaborator })
+  console.log("collaborator is", Checkcollaborator)
+  if (Checkcollaborator != null) {
+    const data = await Notes.findOneAndUpdate(
+      {
+        _id: _id
+      },
+      {
+        $addToSet: { collaborator: body.collaborator }
+      },
+      {
+        new: true
+      }
+    );
+    return data;
   }
-  else{ 
+  else {
     throw new Error("invaild email to collaborate");
   }
 };
-
+//delete Collaborator from a note
+export const deleteCollaborator = async (_id, collaborator) => {
+  const data = await Notes.findByIdAndUpdate({ _id: _id, collaborator: collaborator.email },
+    { 
+      $pull: { collaborator:collaborator } 
+    },
+    {
+      new: true
+    });
+  return data;
+}
 
 
