@@ -25,7 +25,6 @@ export const  NewNotesValidator = (req, res, next) => {
   isArchived: Joi.string().optional(),
   isDeleted:Joi.string().optional(),
   UserID:Joi.string().optional(),
-   
   });
   const { error, value } = schema.validate(req.body);
   if (error) {
@@ -36,4 +35,14 @@ export const  NewNotesValidator = (req, res, next) => {
   }
 };
     
-
+export const collaboratorValidator = (req, res, next) => {
+  const schema = Joi.object({
+    collaborator: Joi.string().email()
+  });
+  const { error, value } = schema.validate(req.body);
+  if (error) {
+    next(error);
+  } else {
+    next();
+  }
+};

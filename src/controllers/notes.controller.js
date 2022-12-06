@@ -150,3 +150,23 @@ export const trashNote = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Controller to collaborate a note
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const collaborateNote = async (req, res, next) => {
+  try {
+    const data = await NoteService.collaborateNote(req.params._id,req.body);
+    res.status(HttpStatus.ACCEPTED).json({
+      code: HttpStatus.ACCEPTED,
+      data: data,
+      message: 'note collaborated successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
