@@ -38,8 +38,11 @@ export const  getAllNotes= async (req, res, next) => {
         message: 'All notes fetched successfully'
       });
     } catch (error){
-        next(error);
-      }
+      res.status(HttpStatus.BAD_REQUEST).json({
+        code: HttpStatus.BAD_REQUEST,
+        message: `${error}`
+        });
+        }
     };
   /**
  * Controller to get a note by id
@@ -56,9 +59,12 @@ export const getNote = async (req, res, next) => {
       message: 'note fetched successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 /**
  * Controller to update a note
  * @param  {object} req - request object
@@ -74,9 +80,12 @@ export const getNote = async (req, res, next) => {
       message: 'note updated successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 /**
  * Controller to delete a note
  * @param  {object} req - request object
@@ -92,9 +101,12 @@ export const deleteNote = async (req, res, next) => {
       message: 'note deleted successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 /**
  * Controller to archieve a note
  * @param  {object} req - request object
@@ -110,9 +122,12 @@ export const deleteNote = async (req, res, next) => {
       message: 'note archived successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 
 /**
  * Controller to trash a note
@@ -129,9 +144,12 @@ export const trashNote = async (req, res, next) => {
       message: 'note trashed successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 /**
  * Controller to pin a note
  * @param  {object} req - request object
@@ -147,9 +165,12 @@ export const trashNote = async (req, res, next) => {
       message: 'note pinned successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 
 /**
  * Controller to collaborate a note
@@ -166,9 +187,12 @@ export const trashNote = async (req, res, next) => {
       message: 'note collaborated successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };
 /**
  * Controller to delete collaborator from a note
  * @param  {object} req - request object
@@ -184,7 +208,10 @@ export const trashNote = async (req, res, next) => {
       message: 'note collaborator deleted successfully'
     });
   } catch (error) {
-    next(error);
-  }
-};
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+      });
+      }
+  };;
 

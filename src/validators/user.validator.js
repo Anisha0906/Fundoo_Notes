@@ -1,4 +1,6 @@
 import Joi from '@hapi/joi';
+import HttpStatus from 'http-status-codes';
+
 
 export const NewUserValidator = (req, res, next) => {
   const schema = Joi.object({
@@ -8,11 +10,13 @@ export const NewUserValidator = (req, res, next) => {
     password: Joi.string().min(8).required()
    
   });
-  const { error, value } = schema.validate(req.body);
+  const { error} = schema.validate(req.body);
   if (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
   } else {
-    req.validatedBody = value;
     next();
   }
 };
@@ -26,11 +30,13 @@ export const  NewNotesValidator = (req, res, next) => {
   isDeleted:Joi.string().optional(),
   UserID:Joi.string().optional(),
   });
-  const { error, value } = schema.validate(req.body);
+  const { error} = schema.validate(req.body);
   if (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
   } else {
-    req.validatedBody = value;
     next();
   }
 };
@@ -38,10 +44,14 @@ export const  NewNotesValidator = (req, res, next) => {
 export const collaboratorValidator = (req, res, next) => {
   const schema = Joi.object({
     collaborator: Joi.string().email()
+   //collaborator: Joi.string().pattern(new RegExp("/^([A-Za-z0-9._-]+{3,})@([A-Za-z0-9]+).([a-zA-Z])$/"))
   });
-  const { error, value } = schema.validate(req.body);
+  const { error} = schema.validate(req.body);
   if (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
   } else {
     next();
   }
